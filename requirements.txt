@@ -1,2 +1,4 @@
 ta
 python-binance
+flask
+requests
