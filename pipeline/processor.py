@@ -149,6 +149,7 @@ from filters.volume_delta import volume_delta
 
 # Другие модули
 from indicators.awesome import awesome_oscillator
+from indicators.rsi import rsi_signal
 from market_state.phase_detector import detect_phase
 from strategy.confidence import calculate_confidence
 from state.signal_state import SignalState
@@ -278,7 +279,7 @@ def process_kline(symbol, klines):
     ao = awesome_oscillator(klines_5m)
     
     # Определяем фазу (Entry, Wait, Prepare)
-    phase = detect_phase(bb, ao, r_val)
+    phase = detect_phase(bb, ao, r_val, price)
     
     if phase != "ENTRY":
         return

@@ -1,29 +1,8 @@
-# import time
-# from flask import Flask
-# from threading import Thread
-# from runner.bot_loop import run_cycle
-# from config.settings import WATCHLIST, SCAN_INTERVAL_SEC
-
-# app = Flask(__name__)
-
-# @app.route("/")
-# def home():
-#     return "Bot is running"
-
-# def bot():
-#     while True:
-#         run_cycle(WATCHLIST)
-#         time.sleep(SCAN_INTERVAL_SEC)
-
-# if __name__ == "__main__":
-#     Thread(target=bot, daemon=True).start()
-#     app.run(host="0.0.0.0", port=3000)
-
-
 import asyncio
+from contextlib import suppress
 from threading import Thread
 from flask import Flask
-# Обрати внимание: мы импортируем start_stream_manager, а НЕ run_cycle
+# 👇 ВОТ ЭТА СТРОКА ОЧЕНЬ ВАЖНА, БЕЗ НЕЕ БУДЕТ ОШИБКА
 from runner.stream_manager import start_stream_manager
 from notifier.telegram import send
 
@@ -35,14 +14,23 @@ def home():
 
 def run_flask():
     # Запускаем сервер на порту 3000
+    # use_reloader=False важно, чтобы не запускалось два экземпляра бота
     app.run(host="0.0.0.0", port=3000, use_reloader=False)
 
 def run_async_bot():
-    send("🚀 <b>Бот успешно перезапущен!</b>\nЖду сигналы с рынка...") # <--- ДОБАВЬ ЭТУ СТРОКУ
+    # Отправляем приветственное сообщение
+    send("🚀 <b>Бот успешно перезапущен!</b>\nЖду сигналы с рынка...") 
+    
     # Запуск асинхронного цикла событий
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-    loop.run_until_complete(start_stream_manager())
+    # Запуск главной функции из stream_manager
+    try:
+        loop.run_until_complete(start_stream_manager())
+    finally:
+        with suppress(Exception):
+            loop.run_until_complete(loop.shutdown_asyncgens())
+        loop.close()
 
 if __name__ == "__main__":
     print("🟢 Инициализация системы...")
@@ -56,3 +44,5 @@ if __name__ == "__main__":
         run_async_bot()
     except KeyboardInterrupt:
         print("🛑 Бот остановлен пользователем")
+    except Exception as e:
+        print(f"❌ Критическая ошибка в main.py: {e}")
