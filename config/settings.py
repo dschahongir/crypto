@@ -1,16 +1,24 @@
 import os 
 
-# Binance
-BINANCE_API_KEY = os.getenv("BINANCE_API_KEY", "Duq52TQKYdrKgZ4qMpHsu5YcPdPbw0Cxreit8G1KpuPVaUFcWI0nwgWjDOZh74ZH")
-BINANCE_API_SECRET = os.getenv("BINANCE_API_SECRET", "m1iIffyrCbuznHQQN6KxFkPkG7Fyl5YtZ43XV5DlJAz2okZhhN6Zjksqa03yuEuef")
+# === НАСТРОЙКИ BINANCE ===
+BINANCE_API_KEY = os.getenv("BINANCE_API_KEY", "ТВОЙ_КЛЮЧ")
+BINANCE_API_SECRET = os.getenv("BINANCE_API_SECRET", "ТВОЙ_СЕКРЕТ")
 
-# Telegram
-TELEGRAM_API_TOKEN = os.getenv("TELEGRAM_API_TOKEN", "7663643338:AAHVtqPqkWBE5UwhaBvSPBHU_aznWsFOPPU")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "8156800088")
+# === НАСТРОЙКИ TELEGRAM ===
+TELEGRAM_API_TOKEN = "ТВОЙ_ТОКЕН"
+TELEGRAM_CHAT_ID = "ТВОЙ_ID"
 
-# Поведение
+# === ПОВЕДЕНИЕ БОТА ===
 USE_WATCHLIST_ONLY = True
-WATCHLIST = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "AVAXUSDT", "LINKUSDT"]
 
-SCAN_INTERVAL_SEC = 600        # 10 минут
-SIGNAL_COOLDOWN_MIN = 30      # 30 минут
+# 🔥 Оптимизированный список (ТОП активных монет)
+# Убрали дубликаты и "мертвые" монеты.
+WATCHLIST = [
+    "BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT", 
+    "ADAUSDT", "AVAXUSDT", "DOGEUSDT", "DOTUSDT", "MATICUSDT",
+    "LTCUSDT", "LINKUSDT", "ATOMUSDT", "NEARUSDT", "APTUSDT",
+    "ARBUSDT", "OPUSDT", "INJUSDT", "RUNEUSDT", "FTMUSDT"
+]
+
+SCAN_INTERVAL_SEC = 600
+SIGNAL_COOLDOWN_MIN = 30
