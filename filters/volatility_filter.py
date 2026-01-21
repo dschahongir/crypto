@@ -1,7 +1,4 @@
-def atr_filter(atr, price, min_ratio=0.003):
-    """
-    min_ratio = 0.3% от цены
-    """
+def atr_filter(atr, price, min_ratio=0.0015):
     if atr is None:
         return False
 

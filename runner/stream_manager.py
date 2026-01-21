@@ -53,8 +53,11 @@ async def socket_listener(symbol):
                         current_list = market_data.get(symbol, [])
                         current_list.append(new_candle)
 
+                        MAX_CANDLES = 1500
+                        current_list.append(new_candle)
+
                         # Храним не более 200 свечей, чтобы не забивать память
-                        if len(current_list) > 200:
+                        if len(current_list) > MAX_CANDLES:
                             current_list.pop(0)
                         
                         market_data[symbol] = current_list

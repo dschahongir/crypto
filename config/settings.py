@@ -14,10 +14,16 @@ USE_WATCHLIST_ONLY = True
 # 🔥 Оптимизированный список (ТОП активных монет)
 # Убрали дубликаты и "мертвые" монеты.
 WATCHLIST = [
-    "BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT", 
+    "BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT",
     "ADAUSDT", "AVAXUSDT", "DOGEUSDT", "DOTUSDT", "MATICUSDT",
     "LTCUSDT", "LINKUSDT", "ATOMUSDT", "NEARUSDT", "APTUSDT",
-    "ARBUSDT", "OPUSDT", "INJUSDT", "RUNEUSDT", "FTMUSDT"
+    "ARBUSDT", "OPUSDT", "INJUSDT", "RUNEUSDT", "FTMUSDT",
+    "XLMUSDT", "ALGOUSDT", "VETUSDT", "SANDUSDT", "AXSUSDT",
+    "EGLDUSDT", "XMRUSDT", "ZECUSDT", "BCHUSDT", "FLOWUSDT",
+    "XTZUSDT", "AAVEUSDT", "GRTUSDT", "KSMUSDT", "MKRUSDT",
+    "COMPUSDT", "DASHUSDT", "YFIUSDT", "SNXUSDT", "CRVUSDT",
+    "1INCHUSDT", "LUNA2USDT", "STXUSDT", "HNTUSDT", "CHZUSDT",
+    "ZILUSDT", "ENJUSDT", "BATUSDT", "ROSEUSDT", "ANKRUSDT"
 ]
 
 SCAN_INTERVAL_SEC = 600

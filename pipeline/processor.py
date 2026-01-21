@@ -87,7 +87,7 @@ def process_kline(symbol, klines):
     # ===============================================
     # 👀 MONITOR (ВСТАВИЛИ СЮДА, ЧТОБЫ ВИДЕТЬ ВСЕГДА)
     # ===============================================
-    if symbol == "DOTUSDT":
+    if symbol in ["DOTUSDT", "ETHUSDT", "ADAUSDT", "XRPUSDT", "LTCUSDT", "BCHUSDT", "BTCUSDT"]:
         # Проверяем статус тренда просто для вывода в лог
         is_trend_ok = multi_tf_check(klines, klines_5m, klines_15m)
         trend_status = "UP 🟢" if is_trend_ok else "DOWN 🔴"
@@ -126,7 +126,7 @@ def process_kline(symbol, klines):
         return
 
     # 8. Фильтры
-    if not fake_breakout_filter(klines_5m, bb["upper"]):
+    if not fake_breakout_filter(klines_5m, bb["middle"]):
         return
 
     if not volume_delta(klines_5m):
@@ -155,7 +155,7 @@ def process_kline(symbol, klines):
         bb_width=(bb["upper"] - bb["lower"]) / bb["middle"]
     )
     
-    if confidence < 70:
+    if confidence < 65:
         return
 
     # 12. TP / SL

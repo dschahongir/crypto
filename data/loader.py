@@ -4,7 +4,7 @@ from config.settings import BINANCE_API_KEY, BINANCE_API_SECRET
 # Инициализация клиента (для REST API)
 client = Client(BINANCE_API_KEY, BINANCE_API_SECRET)
 
-def fetch_initial_history(symbol, interval="1m", limit=100):
+def fetch_initial_history(symbol, interval="1m", limit=1000):
     """
     Скачивает исторические свечи при старте бота, 
     чтобы не ждать 50 минут заполнения буфера.
