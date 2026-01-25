@@ -4,13 +4,17 @@ def backtest(signals):
 
     for s in signals:
         entry = s["entry"]
-        max_price = max(s["future_prices"])
-        min_price = min(s["future_prices"])
+        tp = s["tp"]
+        sl = s["sl"]
+        prices = s["future_prices"] # Список цен после входа
 
-        if max_price >= entry * 1.01:
-            wins += 1
-        elif min_price <= entry * 0.99:
-            losses += 1
+        for p in prices:
+            if p >= tp:
+                wins += 1
+                break
+            if p <= sl:
+                losses += 1
+                break
 
     total = wins + losses
     winrate = wins / total * 100 if total else 0

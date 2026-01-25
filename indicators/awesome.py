@@ -1,11 +1,22 @@
 def awesome_oscillator(klines):
-    """Возвращает значение AO для списка свечей в формате dict."""
-    if len(klines) < 34:
-        return None
+    """
+    Возвращает кортеж (текущий AO, предыдущий AO).
+    Нужно для определения смены цвета гистограммы.
+    """
+    if len(klines) < 35:
+        return None, None
 
     medians = [(k["high"] + k["low"]) / 2 for k in klines]
 
-    sma5 = sum(medians[-5:]) / 5
-    sma34 = sum(medians[-34:]) / 34
+    # Вспомогательная функция SMA
+    def sma(data, period):
+        return sum(data[-period:]) / period
 
-    return sma5 - sma34
+    # Текущий AO
+    ao_curr = sma(medians, 5) - sma(medians, 34)
+
+    # Предыдущий AO (сдвигаем срез на -1)
+    prev_medians = medians[:-1]
+    ao_prev = sma(prev_medians, 5) - sma(prev_medians, 34)
+
+    return ao_curr, ao_prev

@@ -11,4 +11,4 @@ def can_send(symbol, minutes=SIGNAL_COOLDOWN_MIN):
             return False
 
     cooldowns[symbol] = now
-    return True
+    return Truec
